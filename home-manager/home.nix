@@ -1,8 +1,5 @@
 { pkgs, ... }:
 
-let
-  personal = import ~/Code;
-in
 {
   home.username = "hunter";
   home.homeDirectory = "/home/hunter";
@@ -55,6 +52,8 @@ in
     ".config/fish".recursive = true;
 
     ".config/picom.conf".source = ~/dots/picom.conf;
+
+    "Pictures/11.png".source = ~/dots/static/11.png;
   };
 
   home.sessionVariables = { };
