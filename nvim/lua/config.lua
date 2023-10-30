@@ -21,7 +21,7 @@ vim.o.copyindent = true
 
 -- Folds
 vim.opt.foldmethod = "indent"
-vim.opt.foldminlines = 0
+vim.opt.foldminlines = 2
 vim.opt.foldnestmax = 4
 
 -- Display

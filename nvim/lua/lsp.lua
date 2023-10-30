@@ -1,5 +1,4 @@
 local lspconfig = require('lspconfig')
-local const = require('config_consts')
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -71,7 +70,7 @@ require("mason-lspconfig").setup_handlers {
             globals = { "vim", "describe", "it", "assert" },
           },
           workspace = {
-            library = { const.home .. 'Source/luassert/src/' },
+            library = { os.getenv('HOME') .. 'Source/luassert/src/' },
           },
           telemetry = {
             enable = false,

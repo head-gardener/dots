@@ -1,10 +1,16 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
+let
+  personal = import ~/Code;
+in
 {
   home.username = "hunter";
   home.homeDirectory = "/home/hunter";
   home.stateVersion = "23.05";
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
+    lua
+    nix-prefetch-github
+    unzip
     julia
     flowblade
     gimp
@@ -28,6 +34,8 @@
     fd
     bat
   ];
+
+  fonts.fontconfig.enable = true;
 
   gtk = {
     enable = true;
@@ -78,12 +86,26 @@
       userEmail = "trashbin2019np@gmail.com";
     };
 
+    kitty = {
+      enable = true;
+      font = {
+        package = (pkgs.callPackage ./fonts/lilex.nix {}) {
+          features = [
+            "cv01"
+            "cv06"
+            "cv02"
+            "cv09"
+            "ss01"
+            "ss03"
+          ];
+        };
+        name = "Lilex";
+      };
+      extraConfig = builtins.readFile ~/dots/kitty/kitty.conf;
+    };
+
     fish = {
       enable = true;
-      shellInit = ''
-        set fish_function_path $fish_function_path ~/Source/plugin-foreign-env/functions
-        fenv export COCK=cock
-      '';
       plugins = [
         {
           name = "autopair";

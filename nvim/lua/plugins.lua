@@ -61,6 +61,7 @@ require('lazy').setup({
 
   -- misc
   'head-gardener/catalyst',
+  'chrisbra/improvedft',
   'ja-ford/delaytrain.nvim',
   {
     "tversteeg/registers.nvim",

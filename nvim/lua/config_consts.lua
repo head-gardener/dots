@@ -1,3 +1,0 @@
-return {
-  home = "/home/mkultra/",
-}

@@ -83,6 +83,9 @@ iron.setup {
       },
       rust = {
         command = { "fish" }
+      },
+      nix = {
+        command = { "nix", "repl" }
       }
     },
     repl_open_cmd = require('iron.view').split.vertical.topleft(80),
