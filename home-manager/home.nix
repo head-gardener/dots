@@ -35,6 +35,7 @@ in {
       fd
       bat
       nixfmt
+      personal.main-menu
     ];
   };
 

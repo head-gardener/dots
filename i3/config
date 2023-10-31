@@ -61,7 +61,7 @@ bindsym $mod+q kill
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
-bindsym $mod+d exec --no-startup-id ~/Code/menu/main.sh
+bindsym $mod+d exec --no-startup-id main-menu
 
 # password manager
 bindsym $mod+p exec --no-startup-id passmenu
