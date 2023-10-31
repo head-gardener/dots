@@ -1,36 +1,60 @@
 { pkgs, ... }:
 
-{
-  home.username = "hunter";
-  home.homeDirectory = "/home/hunter";
-  home.stateVersion = "23.05";
-  home.packages = with pkgs; [
-    lua
-    nix-prefetch-github
-    unzip
-    julia
-    flowblade
-    gimp
-    gmic
-    wineWowPackages.stable
-    winetricks
-    libreoffice
-    hunspell
-    hunspellDicts.ru_RU
-    firefox
-    tree
-    fish
-    neofetch
-    telegram-desktop
-    vlc
-    gcc
-    (cargo.overrideAttrs (_: {version = "1.73";}))
-    xclip
-    fzf
-    fzy
-    fd
-    bat
-  ];
+let
+
+  dmenuPatched = pkgs.callPackage ./dmenu {};
+
+  lilex = let
+    pkg = pkgs.callPackage ./fonts/lilex.nix {};
+    font = pkg {
+      features = [
+        "cv01"
+        "cv03"
+        "cv06"
+        "cv09"
+        "cv10"
+        "cv11"
+        "ss01"
+        "ss03"
+      ];
+    };
+    patcher = pkgs.callPackage ./fonts/nerdPatched.nix {};
+  in patcher { inherit font; };
+
+in {
+  home = {
+    username = "hunter";
+    homeDirectory = "/home/hunter";
+    stateVersion = "23.05";
+    packages = with pkgs; [
+      dmenuPatched
+      lua
+      nix-prefetch-github
+      unzip
+      julia
+      flowblade
+      gimp
+      gmic
+      wineWowPackages.stable
+      winetricks
+      libreoffice
+      hunspell
+      hunspellDicts.ru_RU
+      firefox
+      tree
+      fish
+      neofetch
+      telegram-desktop
+      vlc
+      gcc
+      (cargo.overrideAttrs (_: {version = "1.73";}))
+      xclip
+      fzf
+      fzy
+      fd
+      bat
+    ];
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -88,17 +112,8 @@
     kitty = {
       enable = true;
       font = {
-        package = (pkgs.callPackage ./fonts/lilex.nix {}) {
-          features = [
-            "cv01"
-            "cv06"
-            "cv02"
-            "cv09"
-            "ss01"
-            "ss03"
-          ];
-        };
-        name = "Lilex";
+        package = lilex;
+        name = "Lilex Nerd Font Medium";
       };
       extraConfig = builtins.readFile ~/dots/kitty/kitty.conf;
     };
@@ -117,6 +132,19 @@
           src = fetchGit { 
             url = "https://github.com/PatrickF1/fzf.fish";
           };
+        }
+      ];
+    };
+
+    newsboat = {
+      enable = true;
+      extraConfig = ''
+        notify-program "${pkgs.dunst}/bin/dunstify -a 'Newsboat' -u low '%t' '%u'"
+      '';
+      urls = [
+        {
+          title = "Lilex";
+          url = "https://github.com/mishamyrt/Lilex/tags.atom";
         }
       ];
     };

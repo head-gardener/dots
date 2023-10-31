@@ -14,8 +14,8 @@
 { features ? [] }:
 
 stdenv.mkDerivation rec {
-  pname = "lilex-nerd";
-  version = "2.200";
+  pname = "lilex";
+  version = "2.300";
 
   env = (fetchVenv {
     name = "lilexenv";
@@ -33,14 +33,14 @@ stdenv.mkDerivation rec {
     '';
     python = python3;
     pythonPackages = python3Packages;
-    hash = "sha256-mrcF50FHmU+o0bG/C9PUC1FxfSwQoJHRc9Yz/g6ltE0=";
+    hash = "sha256-2Ijx/9afhiZg5b+Yq9raip4X50oRXCmt4cXfLhcUCGk=";
   });
 
   srcs = [ (fetchFromGitHub {
     owner = "mishamyrt";
     repo = "Lilex";
-    rev = "a2b41f31d581c41116f3103b99519742ae6bcc05";
-    sha256 = "qaylALYPzHeAn46KhSe5QAVPgCJdN2bbduigJR7IeXU=";
+    rev = "0196c951c57d641beee3f038e7e41c223f5cb736";
+    sha256 = "hkPVotB5Xs7TpFJTwcpKT3YS2rIKSGgeJ8iskrDO7g8=";
   }) env ];
 
   setSourceRoot = "sourceRoot=source";
@@ -48,13 +48,6 @@ stdenv.mkDerivation rec {
   buildPhase = ''
     source ../venv/bin/activate
     python ./scripts/lilex.py --features '${builtins.concatStringsSep "," features}' build
-    for f in build/ttf/*; do
-      echo patching $f ...
-      bash -c ${fontforge}/bin/fontforge -script ${nerd-font-patcher}/bin/nerd-font-patcher\
-        -c --careful --has-no-italic "$f"
-    done
-    ls -l
-    ls build/ttf/ -l
   '';
 
   installPhase = ''
