@@ -1,14 +1,8 @@
-{
-  stdenv
-, fontforge
-, nerd-font-patcher
-}:
+{ stdenv, fontforge, nerd-font-patcher }:
 
 # Patch all ttfs with nerdpatcher
 
-{
-  font
-}:
+{ font }:
 
 stdenv.mkDerivation {
   name = "${font.pname}NerdPatched";
@@ -31,8 +25,6 @@ stdenv.mkDerivation {
     install -m 444 -Dt $out/share/fonts/truetype ./*.ttf
   '';
 
-  buildInputs = [
-    nerd-font-patcher
-  ];
+  buildInputs = [ nerd-font-patcher ];
 }
 

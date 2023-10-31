@@ -2,23 +2,14 @@
 
 let
 
-  dmenuPatched = pkgs.callPackage ./dmenu {};
+  dmenuPatched = pkgs.callPackage ./dmenu { };
 
   lilex = let
-    pkg = pkgs.callPackage ./fonts/lilex.nix {};
+    pkg = pkgs.callPackage ./fonts/lilex.nix { };
     font = pkg {
-      features = [
-        "cv01"
-        "cv03"
-        "cv06"
-        "cv09"
-        "cv10"
-        "cv11"
-        "ss01"
-        "ss03"
-      ];
+      features = [ "cv01" "cv03" "cv06" "cv09" "cv10" "cv11" "ss01" "ss03" ];
     };
-    patcher = pkgs.callPackage ./fonts/nerdPatched.nix {};
+    patcher = pkgs.callPackage ./fonts/nerdPatched.nix { };
   in patcher { inherit font; };
 
 in {
@@ -47,12 +38,13 @@ in {
       telegram-desktop
       vlc
       gcc
-      (cargo.overrideAttrs (_: {version = "1.73";}))
+      (cargo.overrideAttrs (_: { version = "1.73"; }))
       xclip
       fzf
       fzy
       fd
       bat
+      nixfmt
     ];
   };
 
@@ -84,7 +76,7 @@ in {
 
   programs = {
     home-manager.enable = true;
-    
+
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -92,20 +84,18 @@ in {
       vimAlias = true;
 
       # extraLuaConfig = lib.fileContents /home/hunter/config/nvim/init.lua;
-      plugins = [
-        {
-          plugin = pkgs.vimPlugins.lazy-nvim;
-          # config = ''
-          #  packadd! nvim-colorizer.lua
-          #  lua require 'colorizer'.setup()
-          # '';
-        }
-      ];
+      plugins = [{
+        plugin = pkgs.vimPlugins.lazy-nvim;
+        # config = ''
+        #  packadd! nvim-colorizer.lua
+        #  lua require 'colorizer'.setup()
+        # '';
+      }];
     };
 
     git = {
       enable = true;
-      userName  = "head-gardener";
+      userName = "head-gardener";
       userEmail = "trashbin2019np@gmail.com";
     };
 
@@ -123,15 +113,12 @@ in {
       plugins = [
         {
           name = "autopair";
-          src = fetchGit { 
-            url = "https://github.com/jorgebucaran/autopair.fish";
-          };
+          src =
+            fetchGit { url = "https://github.com/jorgebucaran/autopair.fish"; };
         }
         {
           name = "fzf";
-          src = fetchGit { 
-            url = "https://github.com/PatrickF1/fzf.fish";
-          };
+          src = fetchGit { url = "https://github.com/PatrickF1/fzf.fish"; };
         }
       ];
     };
@@ -141,12 +128,10 @@ in {
       extraConfig = ''
         notify-program "${pkgs.dunst}/bin/dunstify -a 'Newsboat' -u low '%t' '%u'"
       '';
-      urls = [
-        {
-          title = "Lilex";
-          url = "https://github.com/mishamyrt/Lilex/tags.atom";
-        }
-      ];
+      urls = [{
+        title = "Lilex";
+        url = "https://github.com/mishamyrt/Lilex/tags.atom";
+      }];
     };
   };
 }

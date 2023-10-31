@@ -1,17 +1,8 @@
-{ 
-  python3Packages
-, stdenv
-, fetchFromGitHub
-, nerd-font-patcher
-, writeText
-, writeShellScriptBin
-, python3
-, callPackage
-, fetchVenv ? callPackage (import ./fetchVenv.nix) {}
-, fontforge
-} : 
+{ python3Packages, stdenv, fetchFromGitHub, nerd-font-patcher, writeText
+, writeShellScriptBin, python3, callPackage
+, fetchVenv ? callPackage (import ./fetchVenv.nix) { }, fontforge }:
 
-{ features ? [] }:
+{ features ? [ ] }:
 
 stdenv.mkDerivation rec {
   pname = "lilex";
@@ -36,25 +27,28 @@ stdenv.mkDerivation rec {
     hash = "sha256-2Ijx/9afhiZg5b+Yq9raip4X50oRXCmt4cXfLhcUCGk=";
   });
 
-  srcs = [ (fetchFromGitHub {
-    owner = "mishamyrt";
-    repo = "Lilex";
-    rev = "0196c951c57d641beee3f038e7e41c223f5cb736";
-    sha256 = "hkPVotB5Xs7TpFJTwcpKT3YS2rIKSGgeJ8iskrDO7g8=";
-  }) env ];
+  srcs = [
+    (fetchFromGitHub {
+      owner = "mishamyrt";
+      repo = "Lilex";
+      rev = "0196c951c57d641beee3f038e7e41c223f5cb736";
+      sha256 = "hkPVotB5Xs7TpFJTwcpKT3YS2rIKSGgeJ8iskrDO7g8=";
+    })
+    env
+  ];
 
   setSourceRoot = "sourceRoot=source";
 
   buildPhase = ''
     source ../venv/bin/activate
-    python ./scripts/lilex.py --features '${builtins.concatStringsSep "," features}' build
+    python ./scripts/lilex.py --features '${
+      builtins.concatStringsSep "," features
+    }' build
   '';
 
   installPhase = ''
     install -m 444 -Dt $out/share/fonts/truetype/Lilex build/ttf/*.ttf
   '';
 
-  buildInputs = with python3Packages; [
-    fontmake
-  ];
+  buildInputs = with python3Packages; [ fontmake ];
 }

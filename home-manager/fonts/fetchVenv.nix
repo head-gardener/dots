@@ -3,17 +3,10 @@
 # output hash, try reducing requirements.txt in favor of
 # nix-packaged libraries.
 
-{ stdenv
-, lib
-}:
+{ stdenv, lib }:
 
-{ req
-, name
-, python
-, pythonPackages
-, hash ? lib.fakeSha256
-, outputHashAlgo ? "sha256"
-}:
+{ req, name, python, pythonPackages, hash ? lib.fakeSha256
+, outputHashAlgo ? "sha256" }:
 
 stdenv.mkDerivation {
   name = name + ".tar.gz";
@@ -26,7 +19,7 @@ stdenv.mkDerivation {
 
   unpackPhase = ''
     echo "$req" > requirements.txt
-    
+
     unpinned_packages=$(sed -n '/^[^#]/!d; /==/!{p}' requirements.txt)
     if [[ -n $unpinned_packages ]]; then
       echo -e "\e[31mWarning: Some packages aren't pinned, which may result in hash mismatches when rebuilding!\nOffending entries:"
@@ -50,8 +43,5 @@ stdenv.mkDerivation {
         -czf $out .
   '';
 
-  buildInputs = [
-    python
-    pythonPackages.wheel
-  ];
+  buildInputs = [ python pythonPackages.wheel ];
 }

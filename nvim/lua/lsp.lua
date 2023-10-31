@@ -24,7 +24,12 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  
+  if vim.api.nvim_call_function('mapcheck', { key }) == '' then
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, bufopts)
+  end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
