@@ -1,24 +1,14 @@
 { pkgs, ... }:
 
 let
-
-  dmenuPatched = pkgs.callPackage ./dmenu { };
-
-  lilex = let
-    pkg = pkgs.callPackage ./fonts/lilex.nix { };
-    font = pkg {
-      features = [ "cv01" "cv03" "cv06" "cv09" "cv10" "cv11" "ss01" "ss03" ];
-    };
-    patcher = pkgs.callPackage ./fonts/nerdPatched.nix { };
-  in patcher { inherit font; };
-
+  personal = import ./overlay.nix { inherit pkgs; };
 in {
   home = {
     username = "hunter";
     homeDirectory = "/home/hunter";
     stateVersion = "23.05";
     packages = with pkgs; [
-      dmenuPatched
+      personal.dmenu
       lua
       nix-prefetch-github
       unzip
@@ -102,7 +92,7 @@ in {
     kitty = {
       enable = true;
       font = {
-        package = lilex;
+        package = personal.lilex;
         name = "Lilex Nerd Font Medium";
       };
       extraConfig = builtins.readFile ~/dots/kitty/kitty.conf;
