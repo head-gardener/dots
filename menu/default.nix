@@ -1,9 +1,9 @@
-{ writeShellApplication, neovim, kitty }:
+{ writeShellApplication, kitty, julia, neovim }:
 
 writeShellApplication {
   name = "main-menu";
 
-  runtimeInputs = [ neovim kitty ];
+  runtimeInputs = [ kitty julia ];
 
   text = builtins.readFile ./main.sh;
 }

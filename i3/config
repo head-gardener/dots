@@ -197,6 +197,8 @@ bar {
   }
 }
 
+for_window [class="newsboat"] floating enable
+
 default_border pixel 0
 
 font pango:PT Mono 9
@@ -206,7 +208,7 @@ title_align center
 exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_shift_toggle"
 exec --no-startup-id "setxkbmap -option caps:super"
 
-exec --no-startup-id feh --bg-scale $(HOME)/Pictures/11.png
+exec --no-startup-id feh --bg-scale ~/Pictures/11.png
 
 client.focused          #444444 #222222 #ffffff #555555   #444444 
 client.focused_inactive #444444 #222222 #888888 #555555   #444444

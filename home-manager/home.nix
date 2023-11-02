@@ -2,6 +2,17 @@
 
 let
   personal = import ./overlay.nix { inherit pkgs; };
+  unstable = import <unstable> { overlays = [ ]; };
+
+  mlt_7_18 = (import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/"
+      + "9957cd48326fe8dbd52fdc50dd2502307f188b0d.tar.gz";
+  }) { }).mlt;
+
+  flowblade-2-10-0-2 = (import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/"
+      + "5a8650469a9f8a1958ff9373bd27fb8e54c4365d.tar.gz";
+  }) { }).flowblade;
 in {
   home = {
     username = "hunter";
@@ -9,11 +20,13 @@ in {
     stateVersion = "23.05";
     packages = with pkgs; [
       personal.dmenu
+      stack
+      haskell-language-server
       lua
       nix-prefetch-github
       unzip
       julia
-      flowblade
+      flowblade-2-10-0-2
       gimp
       gmic
       wineWowPackages.stable
@@ -119,10 +132,16 @@ in {
       extraConfig = ''
         notify-program "${pkgs.dunst}/bin/dunstify -a 'Newsboat' -u low '%t' '%u'"
       '';
-      urls = [{
-        title = "Lilex";
-        url = "https://github.com/mishamyrt/Lilex/tags.atom";
-      }];
+      urls = [
+        {
+          title = "Ian Henry";
+          url = "https://ianthehenry.com/feed.xml";
+        }
+        {
+          title = "Lilex";
+          url = "https://github.com/mishamyrt/Lilex/tags.atom";
+        }
+      ];
     };
   };
 }

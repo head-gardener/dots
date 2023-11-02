@@ -35,13 +35,18 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+lspconfig.hls.setup {
+  on_attach = on_attach;
+  capabilities = capabilities;
+}
+
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("mason-lspconfig").setup_handlers {
   function(server_name)
     require("lspconfig")[server_name].setup {
       on_attach = on_attach,
-      capabilities = capabilites,
+      capabilities = capabilities,
     }
   end,
   ["rust_analyzer"] = function()
