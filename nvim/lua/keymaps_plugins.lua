@@ -76,7 +76,7 @@ vim.keymap.set('n', '<Leader>tr', ':Neotree focus<CR>', { noremap = true })
 vim.keymap.set('n', '<Leader>tt', ':Neotree float toggle<CR>', { noremap = true })
 
 require 'nvim-treesitter.configs'.setup {
-  ensure_installed = { "elixir", "heex", "eex", "java", "c", "rust", "haskell" },
+  ensure_installed = {},
   sync_install = false,
   ignore_install = {},
   highlight = {

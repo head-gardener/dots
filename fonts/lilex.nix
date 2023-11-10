@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     '';
     python = python3;
     pythonPackages = python3Packages;
-    hash = "sha256-2Ijx/9afhiZg5b+Yq9raip4X50oRXCmt4cXfLhcUCGk=";
+    hash = "sha256-cx5Bu8jtQMbtSLxbUgHj5rzTMsxpyBJ8hhIgH27ucuU=";
   });
 
   srcs = [
