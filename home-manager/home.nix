@@ -4,46 +4,48 @@ let
   personal = import ./overlay.nix { inherit pkgs; };
   unstable = import <unstable> { overlays = [ ]; };
 
-  nixdev = pkgs.buildEnv {
-    name = "nix-devenv";
-    paths = with unstable; [ nixfmt ];
-  };
-
 in {
   home = {
     username = "hunter";
     homeDirectory = "/home/hunter";
     stateVersion = "23.05";
     packages = with pkgs; [
+      arkpandora_ttf
       dconf
       brightnessctl
       libnotify
-      lua
       nix-prefetch-github
       unzip
-      julia
-      gimp
-      gmic
       wineWowPackages.stable
       winetricks
-      libreoffice
-      hunspell
-      hunspellDicts.ru_RU
-      firefox
       tree
       fish
       neofetch
-      telegram-desktop
       vlc
-      gcc
-      unstable.cargo
       xclip
       fzf
       fzy
       fd
       bat
-      nixdev
       (personal.main-menu.override { inherit (personal) dmenu; })
+    ] ++ [
+      nixfmt
+      entr
+      gcc
+      haskell-language-server
+      julia
+      stack
+      lua
+      unstable.cargo
+    ] ++ [
+      gimp-with-plugins
+      gmic
+    ] ++ [
+      libreoffice
+      hunspell
+      hunspellDicts.ru_RU
+      firefox
+      telegram-desktop
     ];
   };
 

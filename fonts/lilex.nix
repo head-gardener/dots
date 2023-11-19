@@ -1,8 +1,5 @@
-{ python3Packages, stdenv, fetchFromGitHub, nerd-font-patcher, writeText
-, writeShellScriptBin, python3, callPackage
-, fetchVenv ? callPackage (import ./fetchVenv.nix) { }, fontforge }:
-
-{ features ? [ ] }:
+{ python3Packages, stdenv, fetchFromGitHub, python3, callPackage
+, fetchVenv ? callPackage (import ./fetchVenv.nix) { }, features ? [ ] }:
 
 stdenv.mkDerivation rec {
   pname = "lilex";
@@ -11,20 +8,14 @@ stdenv.mkDerivation rec {
   env = (fetchVenv {
     name = "lilexenv";
     req = ''
-      fontmake==3.7.1
-      cu2qu==1.6.7
       gftools==0.9.35
-      glyphsLib==6.4.1
       arrrgs==2.0.0
-      # ruff==0.1.2
-      # pylint==3.0.2
-      colored==2.2.3
-      pylance==0.8.7
-      fontbakery==0.10.2
+      fontbakery==0.10.3
     '';
     python = python3;
     pythonPackages = python3Packages;
-    hash = "sha256-cx5Bu8jtQMbtSLxbUgHj5rzTMsxpyBJ8hhIgH27ucuU=";
+    hash = "sha256-9mM4VbELGQohrF+TWPEep1ZyvPy2Klp3FI2kplyKa40=";
+    inputs = with python3Packages; [ cu2qu colored glyphslib ];
   });
 
   srcs = [
@@ -50,5 +41,5 @@ stdenv.mkDerivation rec {
     install -m 444 -Dt $out/share/fonts/truetype/Lilex build/ttf/*.ttf
   '';
 
-  buildInputs = with python3Packages; [ fontmake ];
+  buildInputs = with python3Packages; [ python3 fontmake ];
 }

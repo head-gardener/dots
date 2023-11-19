@@ -33,7 +33,7 @@ vim.o.showmatch = true
 
 -- Search
 vim.o.incsearch = true
-vim.o.hlsearch = true
+vim.o.hlsearch = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
@@ -53,8 +53,8 @@ vim.o.dir = os.getenv("HOME") .. "/.cache/vim" -- cache dir
 vim.g.c_syntax_for_h = 1                       -- .h are c files
 
 -- Highlights
--- vim.cmd('hi Normal          guibg=NONE')
--- vim.cmd('hi Normal          ctermbg=NONE')
+vim.cmd('hi Normal          guibg=NONE')
+vim.cmd('hi Normal          ctermbg=NONE')
 -- vim.cmd('hi Comment         guifg=#9e9e9e')
 -- vim.cmd('hi VertSplit       guifg=#d0d0d0 guibg=NONE')
 -- vim.cmd('hi StatusLine      guibg=NONE')

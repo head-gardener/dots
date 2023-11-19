@@ -6,7 +6,7 @@
 { stdenv, lib }:
 
 { req, name, python, pythonPackages, hash ? lib.fakeSha256
-, outputHashAlgo ? "sha256" }:
+, outputHashAlgo ? "sha256", inputs ? [] }:
 
 stdenv.mkDerivation {
   name = name + ".tar.gz";
@@ -43,5 +43,5 @@ stdenv.mkDerivation {
         -czf $out .
   '';
 
-  buildInputs = [ python pythonPackages.wheel ];
+  buildInputs = [ python pythonPackages.wheel ] ++ inputs;
 }
