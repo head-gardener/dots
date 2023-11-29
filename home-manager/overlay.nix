@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs ? import <nixpkgs> {} }:
 
 rec {
   dmenu = pkgs.callPackage ../dmenu { };
@@ -12,4 +12,6 @@ rec {
   in patcher { inherit font; };
 
   main-menu = pkgs.callPackage ../menu { };
+
+  cpanel = pkgs.callPackage ../cpanel { };
 }

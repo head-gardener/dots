@@ -2,7 +2,7 @@
 
 TERM_EMUL="$(which kitty)"
 
-case $(echo -ne '⚡  run\n  configure\n  math\n☎ news' | dmenu) in
+case $(echo -ne '⚡  run\n  configure\n⛴  shell\n  math\n📡 news' | dmenu) in
   *configure)
     path="$(find "$HOME"/dots/ -maxdepth 1 -mindepth 1\
       -type d -not -name '\.*' -printf '%P\n' | dmenu)"
@@ -14,6 +14,15 @@ case $(echo -ne '⚡  run\n  configure\n  math\n☎ news' | dmenu) in
 
   *run)
     i3-dmenu-desktop
+    ;;
+
+  *shell)
+    shell="$(find "$HOME" -maxdepth 4 -type f -name "shell.nix"\
+      | sed "s|$HOME|~|; s/shell.nix//" | dmenu | sed "s|~|$HOME|")"
+
+    if test -n "$shell" && test -e "$shell"; then
+      "$TERM_EMUL" -d "$shell" nix-shell "$shell"shell.nix
+    fi
     ;;
 
   *math)

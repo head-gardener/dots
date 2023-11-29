@@ -11,10 +11,13 @@ in {
     stateVersion = "23.05";
     packages = with pkgs; [
       (personal.main-menu.override { inherit (personal) dmenu; })
+      (personal.main-menu.override { inherit (personal) dmenu; })
       arkpandora_ttf
+      bat
       bat
       brightnessctl
       dconf
+      fd
       fd
       fish
       fzf
@@ -22,6 +25,10 @@ in {
       libnotify
       neofetch
       nix-prefetch-github
+      personal.cpanel
+      personal.dmenu
+      pw-volume
+      qpwgraph
       tree
       unzip
       vlc
@@ -33,6 +40,8 @@ in {
       gcc
       haskell-language-server
       julia
+      stack
+      cabal-install
       lua
       nixfmt
       stack

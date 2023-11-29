@@ -88,7 +88,11 @@ iron.setup {
         command = { "nix", "repl" }
       }
     },
+<<<<<<< Updated upstream
     repl_open_cmd = require('iron.view').split.vertical.topleft(40),
+=======
+    repl_open_cmd = require('iron.view').split.vertical.topleft(50),
+>>>>>>> Stashed changes
   },
   -- Iron doesn't set keymaps by default anymore.
   -- You can set them here or manually add keymaps to the functions in iron.core

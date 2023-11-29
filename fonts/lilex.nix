@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     '';
     python = python3;
     pythonPackages = python3Packages;
-    hash = "sha256-9mM4VbELGQohrF+TWPEep1ZyvPy2Klp3FI2kplyKa40=";
+    hash = "sha256-7E/1291/GPSQwodKkealYeyg5cjJLSBuhUoj8ykMhVQ=";
     inputs = with python3Packages; [ cu2qu colored glyphslib ];
   });
 
