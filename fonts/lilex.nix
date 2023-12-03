@@ -5,17 +5,13 @@ stdenv.mkDerivation rec {
   pname = "lilex";
   version = "2.300";
 
+  # this fucking sucks
   env = (fetchVenv {
     name = "lilexenv";
-    req = ''
-      gftools==0.9.35
-      arrrgs==2.0.0
-      fontbakery==0.10.3
-    '';
+    req = builtins.readFile ./pip.lock;
     python = python3;
     pythonPackages = python3Packages;
-    hash = "sha256-7E/1291/GPSQwodKkealYeyg5cjJLSBuhUoj8ykMhVQ=";
-    inputs = with python3Packages; [ cu2qu colored glyphslib ];
+    hash = "sha256-Hcpsu7+yiBbYoSjKzX3Hv3xrW8dqh7GAoX5UNMhfEU8=";
   });
 
   srcs = [
