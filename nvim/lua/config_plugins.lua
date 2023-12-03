@@ -79,7 +79,7 @@ iron.setup {
         command = { "fish" }
       },
       haskell = {
-        command = { "stack", "repl" }
+        command = { "cabal", "repl" }
       },
       rust = {
         command = { "fish" }
@@ -88,7 +88,7 @@ iron.setup {
         command = { "nix", "repl" }
       }
     },
-    repl_open_cmd = require('iron.view').split.vertical.topleft(80),
+    repl_open_cmd = require('iron.view').split.vertical.topleft(40),
   },
   -- Iron doesn't set keymaps by default anymore.
   -- You can set them here or manually add keymaps to the functions in iron.core

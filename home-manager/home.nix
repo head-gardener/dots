@@ -10,41 +10,41 @@ in {
     homeDirectory = "/home/hunter";
     stateVersion = "23.05";
     packages = with pkgs; [
+      (personal.main-menu.override { inherit (personal) dmenu; })
       arkpandora_ttf
-      dconf
+      bat
       brightnessctl
-      libnotify
-      nix-prefetch-github
-      unzip
-      wineWowPackages.stable
-      winetricks
-      tree
+      dconf
+      fd
       fish
-      neofetch
-      vlc
-      xclip
       fzf
       fzy
-      fd
-      bat
-      (personal.main-menu.override { inherit (personal) dmenu; })
+      libnotify
+      neofetch
+      nix-prefetch-github
+      tree
+      unzip
+      vlc
+      wineWowPackages.stable
+      winetricks
+      xclip
     ] ++ [
-      nixfmt
       entr
       gcc
       haskell-language-server
       julia
-      stack
       lua
+      nixfmt
+      stack
       unstable.cargo
     ] ++ [
       gimp-with-plugins
       gmic
     ] ++ [
-      libreoffice
+      firefox
       hunspell
       hunspellDicts.ru_RU
-      firefox
+      libreoffice
       telegram-desktop
     ];
   };
