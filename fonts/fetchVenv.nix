@@ -40,7 +40,7 @@ stdenv.mkDerivation {
   installPhase = ''
     tar --owner=0 --group=0 --numeric-owner --format=gnu \
         --sort=name --mtime="@$SOURCE_DATE_EPOCH" \
-        -czf $out .
+        -czf $out venv
   '';
 
   buildInputs = [ python pythonPackages.wheel ] ++ inputs;

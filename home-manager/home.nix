@@ -8,9 +8,8 @@ in {
   home = {
     username = "hunter";
     homeDirectory = "/home/hunter";
-    stateVersion = "23.05";
+    stateVersion = "23.11";
     packages = with pkgs; [
-      (personal.main-menu.override { inherit (personal) dmenu; })
       (personal.main-menu.override { inherit (personal) dmenu; })
       arkpandora_ttf
       bat
@@ -87,6 +86,17 @@ in {
   programs = {
     home-manager.enable = true;
 
+    tmux = {
+      enable = true;
+      # package = unstable.tmux;
+      shell = "${pkgs.fish}/bin/fish";
+      prefix = "C-a";
+      keyMode = "vi";
+      mouse = true;
+      extraConfig = ''
+      '';
+    };
+
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -116,6 +126,7 @@ in {
         name = "Lilex Nerd Font Medium";
       };
       extraConfig = builtins.readFile ~/dots/kitty/kitty.conf;
+      shellIntegration.enableFishIntegration = true;
     };
 
     fish = {
@@ -123,6 +134,9 @@ in {
       interactiveShellInit = ''
         ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       '';
+        # if not set -q TMUX
+        #   exec tmux
+        # end
       plugins = [
         {
           name = "autopair";
