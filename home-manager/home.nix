@@ -94,7 +94,9 @@ in {
       keyMode = "vi";
       mouse = true;
       extraConfig = ''
+        set -g status-style bg=default
       '';
+      newSession = true;
     };
 
     neovim = {
