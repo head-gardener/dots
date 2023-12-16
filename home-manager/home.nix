@@ -95,6 +95,7 @@ in {
       mouse = true;
       extraConfig = ''
         set -g status-style bg=default
+        set -s escape-time 0
       '';
       newSession = true;
     };
