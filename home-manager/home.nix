@@ -164,6 +164,30 @@ in {
           url = "https://ianthehenry.com/feed.xml";
         }
         {
+          title = "Willghatch";
+          url = "http://www.willghatch.net/blog/feeds/all.rss.xml";
+        }
+        {
+          title = "tweag nix";
+          url = "https://www.tweag.io/rss-nix.xml";
+        }
+        {
+          title = "tweag engineering";
+          url = "https://www.tweag.io/rss.xml";
+        }
+        {
+          title = "monday morning haskell";
+          url = "https://mmhaskell.com/blog?format=rss";
+        }
+        {
+          title = "Haskell Weekly";
+          url = "https://haskellweekly.news/newsletter.atom";
+        }
+        {
+          title = "planet haskell";
+          url = "https://planet.haskell.org/rss20.xml";
+        }
+        {
           title = "Lilex";
           url = "https://github.com/mishamyrt/Lilex/tags.atom";
         }
