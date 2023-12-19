@@ -88,6 +88,7 @@ in {
 
     tmux = {
       enable = true;
+      terminal = "screen-256color";
       # package = unstable.tmux;
       shell = "${pkgs.fish}/bin/fish";
       prefix = "C-a";
