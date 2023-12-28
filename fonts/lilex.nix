@@ -2,16 +2,16 @@
 
 stdenv.mkDerivation {
   pname = "lilex";
-  version = "2.300";
+  version = "2.400";
 
   srcs = [(fetchFromGitHub {
     owner = "mishamyrt";
     repo = "Lilex";
-    rev = "0196c951c57d641beee3f038e7e41c223f5cb736";
-    sha256 = "hkPVotB5Xs7TpFJTwcpKT3YS2rIKSGgeJ8iskrDO7g8=";
+    rev = "0bb53c1458f3a511feb1ced97b5682c014b02397";
+    hash = "sha256-xanRGw6jTdvy0agZAzUCqh9NeP9Sji+temUPtPr+KSc=";
   })];
 
-  outputHash = "sha256-n7DfIiypUe6ONm223aUhzWECbk3rV3PgA3VDkrwvzhc=";
+  outputHash = "sha256-+3qVLFZ8OAb00pnajo0Fh6UQZ1H0jDlcxp0txauB3vY=";
   outputHashAlgo = "sha256";
   outputHashMode= "recursive";
 

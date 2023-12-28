@@ -16,6 +16,7 @@ in {
       bat
       brightnessctl
       dconf
+      easyeffects
       fd
       fd
       fish
@@ -24,6 +25,7 @@ in {
       libnotify
       neofetch
       nix-prefetch-github
+      obs-studio
       personal.cpanel
       personal.dmenu
       pw-volume
@@ -197,11 +199,12 @@ in {
       # package = unstable.tmux;
       shell = "${pkgs.fish}/bin/fish";
       prefix = "C-a";
-      keyMode = "vi";
       mouse = true;
       extraConfig = ''
         set -g status-style bg=default
         set -s escape-time 0
+        set -g status-keys emacs
+        set -g mode-keys vi
       '';
       newSession = true;
     };

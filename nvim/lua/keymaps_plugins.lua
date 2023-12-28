@@ -53,6 +53,8 @@ vim.keymap.set('n', '<Leader>sd', ':SymbolsOutline<CR>', { noremap = true })
 
 -- Commentary
 vim.keymap.set({ 'n', 'v' }, '<C-/>', ':Commentary<CR>', { noremap = true })
+-- alt keymap for tmux - it sends C-/ as C-_
+vim.keymap.set({ 'n', 'v' }, '<C-_>', ':Commentary<CR>', { noremap = true })
 
 -- Zen
 vim.keymap.set('n', '<Space>ze', ':ZenMode<CR>', { noremap = true })
