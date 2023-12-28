@@ -37,14 +37,14 @@ in {
       winetricks
       xclip
     ] ++ [
+      cabal-install
       entr
       gcc
       haskell-language-server
       julia
-      stack
-      cabal-install
       lua
       nixfmt
+      stack
       stack
       unstable.cargo
     ] ++ [
@@ -89,16 +89,10 @@ in {
     emacs = {
       enable = true;
       extraPackages = epkgs: [
-        epkgs.denote
+        epkgs.org
         epkgs.nordic-night-theme
       ];
-      extraConfig = ''
-        (load-theme 'nordic-night)
-        (menu-bar-mode -1)
-        (scroll-bar-mode -1)
-        (tool-bar-mode -1)
-        (set-face-attribute 'default nil :font "LilexNerdFontMedium-9")
-      '';
+      extraConfig = builtins.readFile ../emacs/init.el;
     };
 
     fish = {
@@ -133,7 +127,7 @@ in {
         package = personal.lilex;
         name = "Lilex Nerd Font Medium";
       };
-      extraConfig = builtins.readFile ~/dots/kitty/kitty.conf;
+      extraConfig = builtins.readFile ../kitty/kitty.conf;
       shellIntegration.enableFishIntegration = true;
     };
 
