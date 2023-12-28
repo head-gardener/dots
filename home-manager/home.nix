@@ -84,53 +84,19 @@ in {
   home.sessionVariables = { };
 
   programs = {
-    home-manager.enable = true;
-
-    tmux = {
+    emacs = {
       enable = true;
-      terminal = "screen-256color";
-      # package = unstable.tmux;
-      shell = "${pkgs.fish}/bin/fish";
-      prefix = "C-a";
-      keyMode = "vi";
-      mouse = true;
+      extraPackages = epkgs: [
+        epkgs.denote
+        epkgs.nordic-night-theme
+      ];
       extraConfig = ''
-        set -g status-style bg=default
-        set -s escape-time 0
+        (load-theme 'nordic-night)
+        (menu-bar-mode -1)
+        (scroll-bar-mode -1)
+        (tool-bar-mode -1)
+        (set-face-attribute 'default nil :font "LilexNerdFontMedium-9")
       '';
-      newSession = true;
-    };
-
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-
-      # extraLuaConfig = lib.fileContents /home/hunter/config/nvim/init.lua;
-      plugins = [{
-        plugin = pkgs.vimPlugins.lazy-nvim;
-        # config = ''
-        #  packadd! nvim-colorizer.lua
-        #  lua require 'colorizer'.setup()
-        # '';
-      }];
-    };
-
-    git = {
-      enable = true;
-      userName = "head-gardener";
-      userEmail = "trashbin2019np@gmail.com";
-    };
-
-    kitty = {
-      enable = true;
-      font = {
-        package = personal.lilex;
-        name = "Lilex Nerd Font Medium";
-      };
-      extraConfig = builtins.readFile ~/dots/kitty/kitty.conf;
-      shellIntegration.enableFishIntegration = true;
     };
 
     fish = {
@@ -138,9 +104,6 @@ in {
       interactiveShellInit = ''
         ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       '';
-        # if not set -q TMUX
-        #   exec tmux
-        # end
       plugins = [
         {
           name = "autopair";
@@ -152,6 +115,39 @@ in {
           src = fetchGit { url = "https://github.com/PatrickF1/fzf.fish"; };
         }
       ];
+    };
+
+    git = {
+      enable = true;
+      userName = "head-gardener";
+      userEmail = "trashbin2019np@gmail.com";
+    };
+
+    home-manager.enable = true;
+
+    kitty = {
+      enable = true;
+      font = {
+        package = personal.lilex;
+        name = "Lilex Nerd Font Medium";
+      };
+      extraConfig = builtins.readFile ~/dots/kitty/kitty.conf;
+      shellIntegration.enableFishIntegration = true;
+    };
+
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      # extraLuaConfig = lib.fileContents /home/hunter/config/nvim/init.lua;
+      plugins = [{
+        plugin = pkgs.vimPlugins.lazy-nvim;
+        # config = ''
+        #  packadd! nvim-colorizer.lua
+        #  lua require 'colorizer'.setup()
+        # '';
+      }];
     };
 
     newsboat = {
@@ -193,6 +189,21 @@ in {
           url = "https://github.com/mishamyrt/Lilex/tags.atom";
         }
       ];
+    };
+
+    tmux = {
+      enable = true;
+      terminal = "screen-256color";
+      # package = unstable.tmux;
+      shell = "${pkgs.fish}/bin/fish";
+      prefix = "C-a";
+      keyMode = "vi";
+      mouse = true;
+      extraConfig = ''
+        set -g status-style bg=default
+        set -s escape-time 0
+      '';
+      newSession = true;
     };
   };
 }
