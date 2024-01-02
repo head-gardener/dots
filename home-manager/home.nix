@@ -89,8 +89,8 @@ in {
     emacs = {
       enable = true;
       extraPackages = epkgs: [
-        epkgs.org
         epkgs.nordic-night-theme
+        epkgs.org
       ];
       extraConfig = builtins.readFile ../emacs/init.el;
     };
@@ -183,6 +183,18 @@ in {
         {
           title = "Lilex";
           url = "https://github.com/mishamyrt/Lilex/tags.atom";
+        }
+        {
+          title = "Conal Elliott's blog";
+          url = "http://conal.net/blog/feed";
+        }
+        {
+          title = "NixOS Weekly";
+          url = "https://weekly.nixos.org/feeds/all.rss.xml";
+        }
+        {
+          title = "Reasonably Polymorphic (Sandy Maguire)";
+          url = "https://reasonablypolymorphic.com/atom.xml";
         }
       ];
     };
