@@ -3,7 +3,7 @@
 let
   personal = import ./overlay.nix { inherit pkgs; };
   unstable = import <unstable> { overlays = [ ]; };
-
+  inherit (pkgs) lib;
 in {
   home = {
     username = "hunter";
@@ -56,6 +56,7 @@ in {
       hunspellDicts.ru_RU
       libreoffice
       telegram-desktop
+      thunderbird
     ];
   };
 
@@ -100,16 +101,17 @@ in {
       interactiveShellInit = ''
         ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       '';
-      plugins = [
-        {
-          name = "autopair";
-          src =
-            fetchGit { url = "https://github.com/jorgebucaran/autopair.fish"; };
-        }
-        {
-          name = "fzf";
-          src = fetchGit { url = "https://github.com/PatrickF1/fzf.fish"; };
-        }
+      plugins = let
+        ghplug = url: {
+          name = lib.last (lib.splitString "/" url);
+          src = fetchGit { url = url; };
+        } ;
+      in builtins.map ghplug [
+        "https://github.com/jorgebucaran/autopair.fish"
+        "https://github.com/PatrickF1/fzf.fish"
+        "https://github.com/franciscolourenco/done"
+        "https://github.com/PatrickF1/colored_man_pages.fish"
+        "https://github.com/wfxr/forgit"
       ];
     };
 
