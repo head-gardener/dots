@@ -89,11 +89,16 @@ in {
   programs = {
     emacs = {
       enable = true;
-      extraPackages = epkgs: [
-        epkgs.nordic-night-theme
-        epkgs.org
+      extraPackages = epkgs: with epkgs; [
+        nordic-night-theme
+        org
+        ob-mermaid
+        magit
       ];
-      extraConfig = builtins.readFile ../emacs/init.el;
+      extraConfig = ''
+        ${builtins.readFile ../emacs/init.el}
+        (setq ob-mermaid-cli-path "${pkgs.mermaid-cli}/bin/mmdc")
+      '';
     };
 
     fish = {
@@ -105,7 +110,7 @@ in {
         ghplug = url: {
           name = lib.last (lib.splitString "/" url);
           src = fetchGit { url = url; };
-        } ;
+        };
       in builtins.map ghplug [
         "https://github.com/jorgebucaran/autopair.fish"
         "https://github.com/PatrickF1/fzf.fish"
@@ -117,7 +122,7 @@ in {
 
     git = {
       enable = true;
-      userName = "head-gardener";
+      userName = "Head Gardener";
       userEmail = "trashbin2019np@gmail.com";
     };
 
