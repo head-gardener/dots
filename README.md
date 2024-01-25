@@ -1,3 +1,7 @@
+# MOVED
+
+This config is now available as a flake [here](https://github.com/head-gardener/config).
+
 # DOTFILES
 
 ![screenshot](./2023-11-02_04:30:42.png)
