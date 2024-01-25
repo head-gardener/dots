@@ -1,9 +1,7 @@
-{ pkgs, ... }:
+{ lib, pkgs, inputs, ... }:
 
 let
   personal = import ./overlay.nix { inherit pkgs; };
-  unstable = import <unstable> { overlays = [ ]; };
-  inherit (pkgs) lib;
 in {
   home = {
     username = "hunter";
@@ -46,7 +44,7 @@ in {
       nixfmt
       stack
       stack
-      unstable.cargo
+      inputs.unstable.legacyPackages."x86_64-linux".cargo
     ] ++ [
       gimp-with-plugins
       gmic
@@ -71,17 +69,17 @@ in {
   };
 
   home.file = {
-    ".config/nvim".source = ~/dots/nvim;
+    ".config/nvim".source = ../nvim;
     ".config/nvim".recursive = true;
 
-    ".config/i3/config".source = ~/dots/i3/config;
+    ".config/i3/config".source = ../i3/config;
 
-    ".config/fish".source = ~/dots/fish;
+    ".config/fish".source = ../fish;
     ".config/fish".recursive = true;
 
-    ".config/picom.conf".source = ~/dots/picom.conf;
+    ".config/picom.conf".source = ../picom.conf;
 
-    "Pictures/11.png".source = ~/dots/static/11.png;
+    "Pictures/11.png".source = ../static/11.png;
   };
 
   home.sessionVariables = { };
@@ -112,11 +110,6 @@ in {
           src = fetchGit { url = url; };
         };
       in builtins.map ghplug [
-        "https://github.com/jorgebucaran/autopair.fish"
-        "https://github.com/PatrickF1/fzf.fish"
-        "https://github.com/franciscolourenco/done"
-        "https://github.com/PatrickF1/colored_man_pages.fish"
-        "https://github.com/wfxr/forgit"
       ];
     };
 
